@@ -1,35 +1,65 @@
 package com.veryworks.android.tetris;
 
-import android.graphics.Color;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 
 /**
- * Created by pc on 9/28/2017.
+ * Created by pc on 9/29/2017.
  */
-public class Block {
-    Paint paint;
-    float unit;
-    float x;
-    float y;
 
-    // 블럭은 기본 크기와 좌표를 가지고 생성된다.
-    public Block(int x, int y, float unit){
-        this.x = x;
-        this.y = y;
-        this.unit = unit;
-        this.paint = new Paint();
-        paint.setColor(Color.RED);
+public class Block {
+    float x,y, unit;
+    Paint paint;
+    Parent parent = null;
+
+    public Block(Property property){
+        x= property.x;
+        y= property.y;
+        unit= property.unit;
+        paint= property.paint;
     }
-    public void moveUp() {
+
+    // 나를 그리는 함수
+    public void onDraw(Canvas canvas){
+        if(parent != null){
+            canvas.drawRect(
+                    parent.getX() + x,
+                    parent.getY() + y,
+                    parent.getX() + x + unit,
+                    parent.getY() + y + unit,
+                    paint);
+        }else{
+            canvas.drawRect(
+                    x,
+                    y,
+                    x + unit,
+                    y + unit,
+                    paint);
+        }
+
+
+    }
+
+    // 이동함수
+    public void up(){
         y = y - unit;
     }
-    public void moveDown(){
+    public void down(){
         y = y + unit;
     }
-    public void moveRight(){
+    public void right(){
         x = x + unit;
     }
-    public void moveLeft(){
+    public void left(){
         x = x - unit;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
+    }
+
+    public interface Parent {
+        float getX();
+        float getY();
     }
 }
