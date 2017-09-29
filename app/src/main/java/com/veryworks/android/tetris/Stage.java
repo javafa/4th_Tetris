@@ -66,7 +66,14 @@ public class Stage extends View {
         invalidate();
     }
     public void down() {
-        board.down();
+        boolean check = board.down();
+        // 다운시 충돌되면 map에 현재 블럭을 삽입하고
+        // 새로운 블럭을 Preview에서 가져와서 담는다.
+        if(!check) {
+            board.addBlockToMap();
+            addBlockToBoardFromPreview();
+            addBlockToPreview();
+        }
         invalidate();
     }
     public void left() {

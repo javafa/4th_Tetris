@@ -97,9 +97,24 @@ public class Board implements Block.Parent{
             block.rotate();
         }
     }
-    public void down() {
+    // 다운키를 눌렀는데 충돌이면
+    // 현재 블럭을 map으로 이전하고
+    // 새로운 블럭을 가져와야 된다.
+    public boolean down() {
         if(checkCollision("y", 1) ) {
             block.y += 1;
+            return true;
+        }
+        return false;
+    }
+    public void addBlockToMap(){
+        for(int v=0 ; v<4 ; v++){
+            for(int h=0 ; h<4 ; h++){
+                int blockCell = block.current[v][h];  // 블럭의 셀 값
+                if(blockCell > 0){
+                    map[(int)block.y +v][(int)block.x + h] = blockCell;
+                }
+            }
         }
     }
     public void left() {
@@ -120,25 +135,28 @@ public class Board implements Block.Parent{
         // 안에 들어있는 블럭의 배열을 비교
         int checkBlock[][] = block.current;
         if("r".equals(command)){
+            // 회전 에서는 현재 블럭이 아닌 다음 블럭을 가져와야 하고
+            // 충돌시에는 실제 회전이 일어나면 안되기 때문에
+            // 임시로 checkBlock에 저장해서 사용한다.
             checkBlock = block.getNext();
         }
 
         for(int v=0 ; v<4 ; v++){
             for(int h=0 ; h<4 ; h++){
-                int blockCell = checkBlock[v][h];                      // 블럭의 셀 값
+                int blockCell = checkBlock[v][h];  // 블럭의 셀 값
 
                 int tempX = (int)block.x + h;
                 if("x".equals(command)) tempX += value;
                 int tempY = (int)block.y + v;
                 if("y".equals(command)) tempY += value;
 
-                // 체크하고자 하는 범위를 넘어가면 continue
+                // 체크하고자 하는 범위가 map의 크기를 넘어가면 continue
                 if(tempY >= map.length || tempX >= map[0].length
                         || tempY < 0 || tempX < 0){
                     continue;
                 }
 
-                int mapCell   = map[ tempY][ tempX]; // 맵의 셀 값
+                int mapCell   = map[ tempY][ tempX]; // map의 셀 값
                 if(blockCell > 0 && mapCell >0){
                     return false;
                 }
