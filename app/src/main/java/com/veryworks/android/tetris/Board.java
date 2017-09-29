@@ -17,7 +17,7 @@ public class Board implements Block.Parent{
     int columns;  // pixel = columns * unit
     int rows;     // pixel = rows * unit
 
-    // 현재 프리뷰에 있는 블럭
+    // 현재 보드에서 동작하는 블럭
     Block block;
 
     public Board(float x, float y, int columns, int rows, float unit){
