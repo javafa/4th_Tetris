@@ -21,15 +21,15 @@ public class Stage extends View {
 
         this.setting = setting;
         // 보드와 프리뷰를 생성한다
-        board = new Board();
+        board = new Board(1, 1, 11, 16, setting.unit);
         preview = new Preview(13, 1, 4, 4, setting.unit);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         preview.onDraw(canvas);
+        board.onDraw(canvas);
     }
 
     // 0. 화면을 최초에 그리기 전에 기본세팅

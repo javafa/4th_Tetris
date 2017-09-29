@@ -7,8 +7,6 @@ import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
     // 0. 게임 세팅
-    private static final int ROWS    = 18; // 게임 가로
-    private static final int COLUMNS = 18; // 게임 세로
     private static Setting setting;        // 설정값
 
     FrameLayout container;
@@ -23,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setGame(){
-        // 0. 화면의 사이즈를 구해서 게임판에 넘긴다\
+        // 0. 화면의 사이즈를 구해서 게임판에 넘긴다
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         int height = metrics.heightPixels;
         int width  = metrics.widthPixels;
-        setting = new Setting(width, height, ROWS, COLUMNS);
+        setting = new Setting(width, height, 18, 18);
     }
 
     private void initView(){
@@ -38,7 +36,4 @@ public class MainActivity extends AppCompatActivity {
 
         container.addView(stage);
     }
-
-
-
 }
