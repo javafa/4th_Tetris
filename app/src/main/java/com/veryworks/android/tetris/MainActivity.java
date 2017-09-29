@@ -34,8 +34,13 @@ public class MainActivity extends AppCompatActivity {
         stage = new Stage(this, setting);
         // 뭔가 그릴것들을 다 준비해놔야 된다.
         stage.init();
-
         container.addView(stage);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 앱이 화면에 보이면 블럭을 동작
+        stage.runBlock();
     }
 
     // 키 패드 연결
@@ -50,5 +55,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void right(View view){
         stage.right();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 앱이 화면에서 없어지면 블럭동작을 중단
+        stage.stopBlock();
     }
 }
