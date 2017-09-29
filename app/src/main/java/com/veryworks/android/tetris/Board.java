@@ -50,4 +50,17 @@ public class Board implements Block.Parent{
     public float getY() {
         return y * unit;
     }
+
+    public void up() {
+        block.rotation = (block.rotation + 1) % block.blocks[block.number].length;
+    }
+    public void down() {
+        block.y += 1;
+    }
+    public void left() {
+        block.x -= 1;
+    }
+    public void right() {
+        block.x += 1;
+    }
 }

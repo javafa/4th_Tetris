@@ -59,4 +59,22 @@ public class Stage extends View {
         Block block = preview.popBlock();
         board.addBlock(block);
     }
+
+    // 키 패드 동작
+    public void up() {
+        board.up();
+        invalidate();
+    }
+    public void down() {
+        board.down();
+        invalidate();
+    }
+    public void left() {
+        board.left();
+        invalidate();
+    }
+    public void right() {
+        board.right();
+        invalidate();
+    }
 }

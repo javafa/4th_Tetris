@@ -3,12 +3,13 @@ package com.veryworks.android.tetris;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
     // 0. 게임 세팅
     private static Setting setting;        // 설정값
-
+    Stage stage;
     FrameLayout container;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView(){
         container = (FrameLayout) findViewById(R.id.container);
-        Stage stage = new Stage(this, setting);
+        stage = new Stage(this, setting);
         // 뭔가 그릴것들을 다 준비해놔야 된다.
         stage.init();
 
         container.addView(stage);
+    }
+
+    // 키 패드 연결
+    public void up(View view){
+        stage.up();
+    }
+    public void down(View view){
+        stage.down();
+    }
+    public void left(View view){
+        stage.left();
+    }
+    public void right(View view){
+        stage.right();
     }
 }
