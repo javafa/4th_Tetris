@@ -206,6 +206,16 @@ public class Block {
         this.parent = parent;
     }
 
+    public void rotate() {
+        rotation = (rotation + 1) % blocks[number].length;
+    }
+
+    public int[][] getNext() {
+        int nextRotation = (rotation + 1) % blocks[number].length;
+        int next[][] = blocks[number][nextRotation];
+        return next;
+    }
+
     public interface Parent {
         float getX();
         float getY();
